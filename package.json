@@ -1,5 +1,5 @@
 {
-	"name": "svelte-json-generator",
+	"name": "svelte-json-form",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",

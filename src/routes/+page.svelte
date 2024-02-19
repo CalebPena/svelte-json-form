@@ -9,7 +9,7 @@
 	import JsonBoolean from '$lib/components/JsonBoolean.svelte';
 	import JsonNull from '$lib/components/JsonNull.svelte';
 	import JsonMap from '$lib/components/JsonMap.svelte';
-	import JsonKey from '$lib/components/JsonKey.svelte';
+	import JsonMapKey from '$lib/components/JsonMapKey.svelte';
 
 	let value: JsonData = {};
 </script>
@@ -45,7 +45,7 @@
 		</JsonArray>
 		<JsonMap jsonKey="i_am_the_map">
 			<div slot="value" let:remove let:updateKey>
-				<JsonKey on:updateKey={updateKey} />:
+				<JsonMapKey on:updateKey={updateKey} />:
 				<JsonString value="hello" />
 				<button type="button" on:click={remove}>Remove</button>
 			</div>

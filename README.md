@@ -1,58 +1,138 @@
-# create-svelte
+# Svelte JSON Form
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Svelte package for creating an HTML form that outputs JSON.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+## How to use
 
-## Creating a project
+The Svelte JSON components work like the regualar HTML form input elements. Svelte JSON provides a couple extra wrappers for creating JSON.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## API
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+### JsonForm
 
-# create a new project in my-app
-npm create svelte@latest my-app
+Wrapper for a JSON from. Should only have one JSON input as a direct child.
+`value`: The value of the JSON in the form
+
+### JsonString
+
+Input for creating a JSON string.
+`value`: The value of the input
+`defaultValue`: The default value of the input
+`jsonKey`: The key of the element in the JSON
+
+### JsonNumber
+
+Input for creating a JSON number.
+`value`: The value of the input
+`defaultValue`: The default value of the input
+`jsonKey`: The key of the element in the JSON
+
+### JsonBoolean
+
+Input for creating a JSON boolean.
+`value`: The value of the input
+`defaultValue`: The default value of the input
+`jsonKey`: The key of the element in the JSON
+
+### JsonNull
+
+Create a field that is always a JSON null
+`value`: Always null
+`jsonKey`: The key of the element in the JSON
+
+### JsonSelect
+
+Create a select with options for the JSON field. Can be mixed types.
+`value`: The value of the select. Must be in options
+`jsonKey`: The key of the element in the JSON
+`options`: List of options for the select
+`defaultValue`: The default value of the select. Must be in options
+`optionProps`: Props to be passed into each option element options
+
+### JsonObject
+
+Wrapper for JSON inputs where each input must have the `jsonKey` prop.
+`jsonKey`: The key of the element in the JSON
+
+### JsonArray
+
+Wrapper for JSON arrays. Requires 2 named slots:
+
+The `value` prop has the inputs for each element in the array. Provides 2 let props.
+`let:index`: The index of the element
+`let:remove`: A function that removes the element
+
+The `add-button` prop is a button to add elements to the array. Provides 1 let prop.
+`let:add`: A function to add an element
+
+`jsonKey`: The key of the element in the JSON
+
+### JsonMap
+
+Json object where the keys are user selected. Requires 2 named slots:
+
+The `value` prop has the inputs for each element in the map. Provides 3 let props.
+`let:index`: The index of the element
+`let:remove`: A function that removes the element
+`let:updateKey`: A function to be passed into the `JsonMapKey` `on:updateKey` event
+
+The `add-button` prop is a button to add elements to the array. Provides 1 let prop.
+`let:add`: A function to add an element
+
+### JsonMapKey
+
+Key used in the JSON map
+`value`: Value of the key.
+`on:updateKey`: Event that fires then the key changes. Usually used with `let:updateKey` from the `JsonMap` component.
+
+## Example
+
+```
+<JsonForm bind:value>
+	<JsonObject>
+		<div>
+			<label for="hello">Hello</label>
+			<JsonNumber jsonKey="hello" id="hello" value={1000} />
+		</div>
+		<div>
+			<label for="world">World</label>
+			<JsonString jsonKey="world" id="world" value="hello" />
+		</div>
+		<div>
+			<label for="number">Number</label>
+			<JsonSelect jsonKey="number" id="number" value="ahhh" options={['ahhh', 'hello', 0, ':)']} />
+		</div>
+		<div>
+			<label for="bool">Boolean</label>
+			<JsonBoolean jsonKey="bool" id="bool" value={true} />
+		</div>
+		<JsonNull jsonKey="null" />
+		<JsonArray jsonKey="arg">
+			<div slot="value" let:index let:remove>
+				<label for={index + 'hello'}>{index}</label>
+				<JsonNumber jsonKey={index} id={index + 'hello'} />
+				<button type="button" on:click={remove}>Remove</button>
+			</div>
+			<div slot="add-button" let:add>
+				<button type="button" on:click={add}>Add</button>
+			</div>
+		</JsonArray>
+		<JsonMap jsonKey="i_am_the_map">
+			<div slot="value" let:remove let:updateKey>
+				<JsonMapKey on:updateKey={updateKey} />:
+				<JsonString value="hello" />
+				<button type="button" on:click={remove}>Remove</button>
+			</div>
+			<div slot="add-button" let:add>
+				<button type="button" on:click={add}>Add</button>
+			</div>
+		</JsonMap>
+	</JsonObject>
+</JsonForm>
+
+<div>{JSON.stringify(value)}</div>
 ```
 
-## Developing
+## Contributing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
-
-## Building
-
-To build your library:
-
-```bash
-npm run package
-```
-
-To create a production version of your showcase app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
-```
+Feel free to create an issue or submit a pull request.

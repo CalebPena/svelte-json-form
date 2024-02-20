@@ -6,9 +6,7 @@ export { default as JsonNull } from './components/JsonNull.svelte';
 export { default as JsonSelect } from './components/JsonSelect.svelte';
 export { default as JsonObject } from './components/JsonObject.svelte';
 export { default as JsonArray } from './components/JsonArray.svelte';
-export { default as JsonArrayItem } from './components/JsonArrayItem.svelte';
 export { default as JsonMap } from './components/JsonMap.svelte';
-export { default as JsonMapItem } from './components/JsonMapItem.svelte';
 export { default as JsonMapKey } from './components/JsonMapKey.svelte';
 
 export type {

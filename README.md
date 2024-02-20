@@ -85,6 +85,13 @@ Key used in the JSON map
 `value`: Value of the key.
 `on:updateKey`: Event that fires then the key changes. Usually used with `let:updateKey` from the `JsonMap` component.
 
+### Types
+
+`JsonDataType`: Any JSON data
+`JsonArrayType`: Any JSON array
+`JsonObjectType`: Any JSON object
+`JsonKeyType`: JSON array or object key
+
 ## Example
 
 ```

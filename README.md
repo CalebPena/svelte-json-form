@@ -101,7 +101,7 @@ Key used in the JSON map
 
 ## Example
 
-```
+```html
 <JsonForm bind:value>
 	<JsonObject>
 		<div>

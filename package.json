@@ -1,11 +1,17 @@
 {
 	"name": "svelte-json-form",
 	"license": "MIT",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/CalebPena/svelte-json-form.git"
 	},
+	"keywords": [
+		"json",
+		"svelte",
+		"forms",
+		"schema"
+	],
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",

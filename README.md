@@ -2,6 +2,12 @@
 
 Svelte package for creating an HTML form that outputs JSON.
 
+## Installing
+
+```bash
+$ npm install axios
+```
+
 ## How to use
 
 The Svelte JSON components work like the regualar HTML form input elements. Svelte JSON provides a couple extra wrappers for creating JSON.
